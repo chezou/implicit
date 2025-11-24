@@ -127,7 +127,7 @@ jobs:
 
     - name: Install wheel
       run: |
-        pip install --force-reinstall --no-deps --no-index --find-links . implicit
+        pip install --force-reinstall --no-deps --no-index --find-links . pm-implicit
     - name: Run unittests
       run: |
         python -m pytest implicit_source/tests
