@@ -25,7 +25,7 @@ setup(
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     url="http://github.com/chezou/pm-implicit/",
-    author="Ben Frederickson",
+    author="Aki Ariga",
     author_email="chezou@gmail.com",
     license="MIT",
     classifiers=[
