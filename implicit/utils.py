@@ -127,25 +127,28 @@ def _batch_call(func, ids, *args, N=10, **kwargs):
         if missing_items > 0:
             batch_ids = np.append(batch_ids, np.full(missing_items, -1))
             batch_scores = np.append(
-                batch_scores, np.full(missing_items, -np.finfo(np.float32).max)
+                batch_scores, np.full(missing_items, -np.finfo(np.float32).max, dtype=np.float32)
             )
 
-        output_ids[i] = batch_ids[:N]
-        output_scores[i] = batch_scores[:N]
+        output_ids[i] = batch_ids[:N].astype(np.int32, copy=False)
+        # Clip values to float32 range to avoid overflow warning
+        scores_slice = batch_scores[:N]
+        scores_slice = np.clip(scores_slice, -np.finfo(np.float32).max, np.finfo(np.float32).max)
+        output_scores[i] = scores_slice.astype(np.float32, copy=False)
 
     return output_ids, output_scores
 
 
 def _filter_items_from_results(queryid, ids, scores, filter_items, N):
     if np.isscalar(queryid):
-        mask = np.in1d(ids, filter_items, invert=True)
+        mask = np.isin(ids, filter_items, invert=True)
         ids, scores = ids[mask][:N], scores[mask][:N]
     else:
         rows = len(queryid)
         filtered_scores = np.zeros((rows, N), dtype=scores.dtype)
         filtered_ids = np.zeros((rows, N), dtype=ids.dtype)
         for row in range(rows):
-            mask = np.in1d(ids[row], filter_items, invert=True)
+            mask = np.isin(ids[row], filter_items, invert=True)
             filtered_ids[row] = ids[row][mask][:N]
             filtered_scores[row] = scores[row][mask][:N]
         ids, scores = filtered_ids, filtered_scores
