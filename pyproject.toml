@@ -1,7 +1,7 @@
 [build-system]
 requires = [
     "scikit-build-core>=0.10",
-    "scikit-build>=0.13.1",
+    "cython-cmake>=0.2",
     "Cython>=0.24",
     "scipy>=0.16",
 ]
