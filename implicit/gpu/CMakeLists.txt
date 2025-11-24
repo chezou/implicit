@@ -101,7 +101,7 @@ else()
         get_target_property(CUDA_ARCH _cuda CUDA_ARCHITECTURES)
         message("using cuda architectures ${CUDA_ARCH} for cuda version ${CUDAToolkit_VERSION}")
     endif()
-    target_link_libraries(_cuda CUDA::cublas CUDA::curand rmm::rmm)
+    target_link_libraries(_cuda CUDA::cublas CUDA::curand rmm::rmm raft::raft)
 
     install(TARGETS _cuda LIBRARY DESTINATION implicit/gpu)
 endif()
