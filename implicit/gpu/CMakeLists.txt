@@ -52,7 +52,10 @@ else()
     ]=])
     rapids_cpm_package_override(${CMAKE_CURRENT_BINARY_DIR}/override.json)
 
-    # get rmm
+    # Disable shared library builds for RMM/RAFT to avoid runtime dependencies
+    set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+
+    # get rmm (header-only usage with static linking)
     include(${rapids-cmake-dir}/cpm/rmm.cmake)
     rapids_cpm_rmm(BUILD_EXPORT_SET implicit-exports INSTALL_EXPORT_SET implicit-exports)
 
