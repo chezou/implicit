@@ -1,7 +1,3 @@
-[tool.black]
-
-line-length = 100
-
 [build-system]
 requires = [
     "setuptools>=42",
@@ -13,6 +9,51 @@ requires = [
     "ninja"
 ]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "pm-implicit"
+version = "0.7.3"
+description = "Collaborative Filtering for Implicit Feedback Datasets"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    {name = "Aki Ariga", email = "chezou@gmail.com"}
+]
+keywords = [
+    "Matrix Factorization",
+    "Implicit Alternating Least Squares",
+    "Collaborative Filtering",
+    "Recommender Systems"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Natural Language :: English",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Cython",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "numpy>=1.17.0",
+    "scipy>=0.16",
+    "tqdm>=4.27",
+    "threadpoolctl"
+]
+
+[project.urls]
+Homepage = "http://github.com/chezou/pm-implicit/"
+Repository = "http://github.com/chezou/pm-implicit/"
+
+[tool.black]
+line-length = 100
 
 [tool.cibuildwheel]
 # skip testing in the cibuildwheel phase, will install the wheels later
