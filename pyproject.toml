@@ -24,9 +24,9 @@ skip = ["*musl*",  "*-manylinux_i686", "*win32"]
 select = "*-manylinux_x86_64*"
 before-all = "ci/install_cuda.sh"
 
-# auditwheel: exclude CUDA libraries but include RMM/rapids_logger
+# auditwheel: bundle RAPIDS libraries, exclude CUDA libraries
 [tool.cibuildwheel.linux]
-repair-wheel-command = "auditwheel repair --exclude libcublas.so.12 --exclude libcurand.so.10 --exclude libcublasLt.so.12 --exclude libcudart.so.12 -w {dest_dir} {wheel}"
+repair-wheel-command = "LD_LIBRARY_PATH=$(find /project/_skbuild -type d -name 'lib' 2>/dev/null | tr '\n' ':')${LD_LIBRARY_PATH} auditwheel repair --exclude libcublas.so.12 --exclude libcurand.so.10 --exclude libcublasLt.so.12 --exclude libcudart.so.12 -w {dest_dir} {wheel}"
 # Use manylinux_2_28 (AlmaLinux 8) for CUDA 12.9 support
 manylinux-x86_64-image = "manylinux_2_28"
 
