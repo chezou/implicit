@@ -27,6 +27,8 @@ before-all = "ci/install_cuda.sh"
 # auditwheel includes cuda libraries, just skip it
 [tool.cibuildwheel.linux]
 repair-wheel-command = ""
+# Use manylinux_2_28 (AlmaLinux 8) for CUDA 12.9 support
+manylinux-x86_64-image = "manylinux_2_28"
 
 [tool.cibuildwheel.linux.environment]
 CUDACXX = "/usr/local/cuda/bin/nvcc"
