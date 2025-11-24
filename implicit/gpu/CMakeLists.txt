@@ -56,9 +56,9 @@ else()
     include(${rapids-cmake-dir}/cpm/rmm.cmake)
     rapids_cpm_rmm(BUILD_EXPORT_SET implicit-exports INSTALL_EXPORT_SET implicit-exports)
 
-    # get raft (building fully to generate logger_macros.hpp)
-    include(${rapids-cmake-dir}/cpm/raft.cmake)
-    rapids_cpm_raft(BUILD_EXPORT_SET implicit-exports INSTALL_EXPORT_SET implicit-exports)
+    # get rapids_logger to generate logger_macros.hpp
+    include(${rapids-cmake-dir}/cpm/rapids_logger.cmake)
+    rapids_cpm_rapids_logger()
 
     set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --extended-lambda -Xfatbin=-compress-all --expt-relaxed-constexpr")
 
