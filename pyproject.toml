@@ -50,8 +50,12 @@ Homepage = "http://github.com/chezou/pm-implicit/"
 Repository = "http://github.com/chezou/pm-implicit/"
 
 [tool.scikit-build]
-cmake.version = ">=3.18"
+cmake.version = ">=3.21"
 cmake.build-type = "Release"
+# Use Unix Makefiles instead of Ninja due to manylinux Ninja 1.8.2 lacking
+# depfile support for multiple outputs (fixed in Ninja 1.10.0)
+# See: https://github.com/ninja-build/ninja/issues/1184
+ninja.make-fallback = false
 wheel.packages = ["implicit"]
 wheel.exclude = [
     "**/thrust/**",
