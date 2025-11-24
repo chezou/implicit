@@ -14,6 +14,8 @@ else()
     add_cython_target(_cuda CXX)
 
     # use rapids-cmake to install dependencies
+    # Set the rapids-cmake version before including RAPIDS.cmake
+    set(rapids-cmake-version 25.08)
     file(DOWNLOAD https://raw.githubusercontent.com/rapidsai/rapids-cmake/branch-25.08/RAPIDS.cmake
         ${CMAKE_BINARY_DIR}/RAPIDS.cmake)
     include(${CMAKE_BINARY_DIR}/RAPIDS.cmake)
