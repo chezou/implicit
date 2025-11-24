@@ -1,7 +1,5 @@
 [MASTER]
 
-ignore-patterns=setup.py
-
 extension-pkg-whitelist=implicit.cpu._als,implicit.cpu.lmf,implicit._nearest_neighbours,implicit.gpu._cuda,implicit.cpu.bpr,implicit.cpu.topk,numpy.random.mtrand,nmslib,faiss
 
 [MESSAGES CONTROL]

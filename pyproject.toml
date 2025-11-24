@@ -62,8 +62,26 @@ wheel.exclude = [
 ]
 minimum-version = "0.10"
 
-[tool.black]
+[tool.ruff]
 line-length = 100
+extend-exclude = ["examples/tutorial_lastfm.ipynb"]
+
+[tool.ruff.lint]
+# Enables: pycodestyle errors/warnings, pyflakes, isort, pyupgrade
+select = ["E", "W", "F", "I", "UP"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["implicit"]
+lines-after-imports = 2
+
+[tool.ruff.format]
+# Use double quotes, 4-space indentation, preserve trailing commas
+quote-style = "double"
+indent-style = "space"
+
+[tool.codespell]
+skip = "./.git,./.github,./build,./dist,./docs/build,.*egg-info.*,*.csv,*.tsv"
+ignore-words-list = "als,coo,nd,unparseable,compiletime"
 
 [tool.cibuildwheel]
 # skip testing in the cibuildwheel phase, will install the wheels later
@@ -92,3 +110,16 @@ archs = ["x86_64", "universal2", "arm64"]
 
 [tool.pytest.ini_options]
 filterwarnings = ['ignore::implicit.utils.ParameterWarning']
+
+[tool.bumpversion]
+current_version = "0.7.3"
+commit = true
+tag = true
+
+[[tool.bumpversion.files]]
+filename = "implicit/__init__.py"
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
