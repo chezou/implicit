@@ -1,10 +1,14 @@
 Implicit
 =======
 
-[![Build
-Status](https://github.com/benfred/implicit/workflows/Build/badge.svg)](https://github.com/benfred/implicit/actions?query=workflow%3ABuild+branch%3Amain)
-[![Documentation](https://img.shields.io/badge/documentation-blue.svg)](https://benfred.github.io/implicit/)
+## Important note about this fork
 
+This repository is a fork of the original [implicit](https://github.com/benfred/implicit). This fork aims to provide Python 3.13 and 3.14 builds.
+
+We don't plan to add any new features or fix any bugs beyond what is necessary to support these Python versions.
+
+[![Build
+Status](https://github.com/chezou/pm-implicit/workflows/Build/badge.svg)](https://github.com/chezou/pm-implicit/actions?query=workflow%3ABuild+branch%3Amain)
 
 Fast Python Collaborative Filtering for Implicit Datasets.
 
@@ -31,21 +35,12 @@ making recommendations](https://www.benfrederickson.com/approximate-nearest-neig
 Implicit can be installed from pypi with:
 
 ```
-pip install implicit
+pip install pm-implicit
 ```
 
 Installing with pip will use prebuilt binary wheels on x86_64 Linux, Windows
 and OSX. These wheels include GPU support on Linux.
 
-Implicit can also be installed with conda:
-
-```
-# CPU only package
-conda install -c conda-forge implicit
-
-# CPU+GPU package
-conda install -c conda-forge implicit implicit-proc=*=gpu
-```
 
 #### Basic Usage
 
