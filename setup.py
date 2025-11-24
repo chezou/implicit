@@ -20,7 +20,7 @@ def exclude_non_implicit_cmake_files(cmake_manifest):
 
 setup(
     name="pm-implicit",
-    version="0.7.2",
+    version="0.7.3",
     description="Collaborative Filtering for Implicit Feedback Datasets",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
@@ -32,7 +32,6 @@ setup(
         "Development Status :: 4 - Beta",
         "Natural Language :: English",
         "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Programming Language :: Cython",
