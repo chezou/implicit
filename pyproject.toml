@@ -1,14 +1,11 @@
 [build-system]
 requires = [
-    "setuptools>=42",
-    "wheel",
+    "scikit-build-core>=0.10",
     "scikit-build>=0.13.1",
     "Cython>=0.24",
     "scipy>=0.16",
-    "cmake>=3.18",
-    "ninja"
 ]
-build-backend = "setuptools.build_meta"
+build-backend = "scikit_build_core.build"
 
 [project]
 name = "pm-implicit"
@@ -51,6 +48,19 @@ dependencies = [
 [project.urls]
 Homepage = "http://github.com/chezou/pm-implicit/"
 Repository = "http://github.com/chezou/pm-implicit/"
+
+[tool.scikit-build]
+cmake.version = ">=3.18"
+cmake.build-type = "Release"
+wheel.packages = ["implicit"]
+wheel.exclude = [
+    "**/thrust/**",
+    "**/spdlog/**",
+    "**/rmm/**",
+    "**/lib/**",
+    "**/include/**",
+]
+minimum-version = "0.10"
 
 [tool.black]
 line-length = 100
