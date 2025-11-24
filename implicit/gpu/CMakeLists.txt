@@ -56,16 +56,9 @@ else()
     include(${rapids-cmake-dir}/cpm/rmm.cmake)
     rapids_cpm_rmm(BUILD_EXPORT_SET implicit-exports INSTALL_EXPORT_SET implicit-exports)
 
-    # get raft
-    # note: we're using RAFT in header only mode right now - mainly to reduce binary
-    # size of the compiled wheels
-    rapids_cpm_find(raft 25.08
-        CPM_ARGS
-          GIT_REPOSITORY  https://github.com/rapidsai/raft.git
-          GIT_TAG         branch-25.08
-          DOWNLOAD_ONLY   YES
-    )
-    include_directories(${raft_SOURCE_DIR}/cpp/include)
+    # get raft (building fully to generate logger_macros.hpp)
+    include(${rapids-cmake-dir}/cpm/raft.cmake)
+    rapids_cpm_raft(BUILD_EXPORT_SET implicit-exports INSTALL_EXPORT_SET implicit-exports)
 
     set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --extended-lambda -Xfatbin=-compress-all --expt-relaxed-constexpr")
 
