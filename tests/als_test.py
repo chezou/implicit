@@ -11,6 +11,7 @@ import implicit
 from implicit.als import AlternatingLeastSquares
 from implicit.gpu import HAS_CUDA
 
+
 # pylint: disable=consider-using-f-string
 
 
@@ -180,9 +181,9 @@ def test_factorize(use_native, use_gpu, use_cg, dtype):
     for i in range(counts.shape[0]):
         for j in range(counts.shape[1]):
             assert pytest.approx(counts[i, j], abs=1e-3) == reconstructed[i, j], (
-                "failed to reconstruct row=%s, col=%s,"
-                " value=%.5f, dtype=%s, cg=%s, native=%s gpu=%s"
-                % (i, j, reconstructed[i, j], dtype, use_cg, use_native, use_gpu)
+                f"failed to reconstruct row={i}, col={j},"
+                f" value={reconstructed[i, j]:.5f}, dtype={dtype}, cg={use_cg},"
+                f" native={use_native}, gpu={use_gpu}"
             )
 
 

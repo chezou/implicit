@@ -9,6 +9,7 @@ from implicit.approximate_als import (
 )
 from implicit.gpu import HAS_CUDA
 
+
 # don't require annoy/faiss/nmslib to be installed
 try:
     import annoy  # noqa pylint: disable=unused-import

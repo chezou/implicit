@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 HAS_CUDA = False
 try:
     from ._cuda import *  # noqa

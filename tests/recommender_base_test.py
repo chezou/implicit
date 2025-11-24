@@ -1,4 +1,5 @@
-""" Common test functions for all recommendation models """
+"""Common test functions for all recommendation models"""
+
 import os
 import pickle
 import random
@@ -12,6 +13,7 @@ from scipy.sparse import coo_matrix, csr_matrix
 from implicit.evaluation import precision_at_k
 from implicit.nearest_neighbours import ItemItemRecommender
 from implicit.utils import ParameterWarning
+
 
 # pylint: disable=too-many-public-methods
 

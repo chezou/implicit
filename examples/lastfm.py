@@ -1,4 +1,4 @@
-""" An example of using this library to calculate related artists
+"""An example of using this library to calculate related artists
 from the last.fm dataset. More details can be found
 at http://www.benfrederickson.com/matrix-factorization/
 
@@ -6,6 +6,7 @@ This code will automatically download a HDF5 version of the dataset from
 GitHub when it is first run. The original dataset can also be found at
 http://ocelma.net/MusicRecommendationDataset/lastfm-360K.html
 """
+
 import argparse
 import codecs
 import logging
@@ -29,6 +30,7 @@ from implicit.nearest_neighbours import (
     TFIDFRecommender,
     bm25_weight,
 )
+
 
 # maps command line model argument to class name
 MODELS = {
