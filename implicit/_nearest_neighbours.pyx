@@ -131,8 +131,8 @@ def all_pairs_knn(users, unsigned int K=100, int num_threads=0, show_progress=Tr
 
     # holds triples of output
     cdef double[:] values = np.zeros(item_count * K)
-    cdef long[:] rows = np.zeros(item_count * K, dtype=int)
-    cdef long[:] cols = np.zeros(item_count * K, dtype=int)
+    cdef long long[:] rows = np.zeros(item_count * K, dtype=np.int64)
+    cdef long long[:] cols = np.zeros(item_count * K, dtype=np.int64)
 
     progress = tqdm(total=item_count, disable=not show_progress)
     with nogil, parallel(num_threads=num_threads):
