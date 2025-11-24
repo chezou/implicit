@@ -90,7 +90,7 @@ There are also several other articles about using Implicit to build recommendati
 
 #### Requirements
 
-This library requires SciPy version 0.16 or later and Python version 3.6 or later.
+This library requires SciPy version 0.16 or later and Python version 3.10 or later.
 
 GPU Support requires at least version 12 of the [NVidia CUDA Toolkit](https://developer.nvidia.com/cuda-downloads).
 
