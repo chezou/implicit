@@ -4,7 +4,13 @@ project(${SKBUILD_PROJECT_NAME} LANGUAGES C CXX)
 
 enable_testing()
 
-find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
+# On Windows, we need full Development (includes python3xx.lib)
+# On other platforms, Development.Module is sufficient
+if(WIN32)
+    find_package(Python REQUIRED COMPONENTS Interpreter Development)
+else()
+    find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
+endif()
 
 execute_process(
     COMMAND "${Python_EXECUTABLE}" -c "import os, skbuild; print(os.path.join(os.path.dirname(skbuild.__file__), 'resources', 'cmake'))"
