@@ -87,11 +87,6 @@ jobs:
           python -m build . --sdist -o wheelhouse
         if: ${{ matrix.python-version == '312' && runner.os == 'Linux' }}
 
-      - name: Rename Wheels
-        run: |
-          python ci/rename_wheels.py
-        if: runner.os == 'Linux'
-
       - name: Upload Binaries
         uses: actions/upload-artifact@v4
         with:
