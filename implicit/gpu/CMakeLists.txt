@@ -60,6 +60,20 @@ else()
     include(${rapids-cmake-dir}/cpm/rapids_logger.cmake)
     rapids_cpm_rapids_logger()
 
+    # get raft headers (header-only mode)
+    rapids_cpm_find(raft 25.08
+        GLOBAL_TARGETS      raft::raft
+        BUILD_EXPORT_SET    implicit-exports
+        INSTALL_EXPORT_SET  implicit-exports
+        CPM_ARGS
+            GIT_REPOSITORY  https://github.com/rapidsai/raft.git
+            GIT_TAG         branch-25.08
+            SOURCE_SUBDIR   cpp
+            OPTIONS         "BUILD_TESTS OFF"
+                           "BUILD_BENCH OFF"
+                           "RAFT_COMPILE_LIBRARY OFF"
+    )
+
     set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --extended-lambda -Xfatbin=-compress-all --expt-relaxed-constexpr")
 
     add_library(_cuda MODULE ${_cuda}
