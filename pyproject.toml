@@ -93,6 +93,7 @@ skip = "./.git,./.github,./build,./dist,./docs/build,.*egg-info.*,*.csv,*.tsv"
 ignore-words-list = "als,coo,nd,unparseable,compiletime"
 
 [tool.cibuildwheel]
+build-frontend = "build[uv]"
 # skip testing in the cibuildwheel phase, will install the wheels later
 # and verify
 test-command = ""
