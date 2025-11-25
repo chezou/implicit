@@ -18,19 +18,18 @@ jobs:
     steps:
     - uses: actions/checkout@v6
 
-    - name: Set up Python
-      uses: actions/setup-python@v6
+    - name: Install uv
+      uses: astral-sh/setup-uv@v7
       with:
         python-version: '3.10'
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements-dev.txt
+        uv sync --dev
     - name: Lint with ruff
       run: |
-        ruff format --check .
-        ruff check .
+        uv run ruff format --check .
+        uv run ruff check .
     - name: Lint with clang-format
       run: |
         sudo apt install clang-format
@@ -38,7 +37,7 @@ jobs:
       if: runner.os == 'Linux'
     - name: Lint with codespell
       run: |
-        codespell
+        uv run codespell
 
   build-wheels:
     needs: [lint]
@@ -71,7 +70,7 @@ jobs:
 
       - name: Build sdist
         run: |
-          pip install build 
+          pip install build
           python -m build . --sdist -o wheelhouse
         if: ${{ matrix.python-version == '312' && runner.os == 'Linux' }}
 
@@ -97,28 +96,30 @@ jobs:
       with:
         pattern: wheels-*
         merge-multiple: true
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v6
+    - name: Install uv
+      uses: astral-sh/setup-uv@v7
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install pytest
-        pip install -r implicit_source/requirements.txt
-    - name: Install h5py
-      run: pip install h5py
-
-    - name: Install ANN Libraries
-      run: pip install annoy nmslib
-      if: ${{ matrix.python-version != '3.12' &&  matrix.python-version != '3.11' && runner.os == 'Linux' }}
+        cd implicit_source
+        uv sync --dev --no-install-project
 
     - name: Install wheel
       run: |
-        pip install --force-reinstall --no-deps --no-index --find-links . pm-implicit
+        cd implicit_source
+        uv pip install --force-reinstall --no-deps --no-index --find-links .. pm-implicit
+
+    - name: Install ANN Libraries
+      run: |
+        cd implicit_source
+        uv pip install annoy nmslib
+      if: ${{ matrix.python-version == '3.10' && runner.os == 'Linux' }}
+
     - name: Run unittests
       run: |
-        python -m pytest implicit_source/tests
+        cd implicit_source
+        uv run pytest tests
 
   release:
     name: Release

@@ -50,6 +50,14 @@ dependencies = [
 Homepage = "http://github.com/chezou/pm-implicit/"
 Repository = "http://github.com/chezou/pm-implicit/"
 
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff",
+    "codespell",
+    "h5py",
+]
+
 [tool.scikit-build]
 cmake.version = ">=3.21"
 cmake.build-type = "Release"
