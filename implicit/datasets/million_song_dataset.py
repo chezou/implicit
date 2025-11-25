@@ -9,6 +9,7 @@ from tqdm.auto import tqdm
 
 from implicit.datasets import _download
 
+
 log = logging.getLogger("implicit")
 
 

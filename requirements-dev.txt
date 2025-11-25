@@ -1,9 +1,8 @@
 -r requirements.txt
 
+scikit-build-core>=0.10
 scikit-build>=0.13.1
+Cython>=0.24
 pytest
-black==22.3.0
-flake8
-isort
+ruff
 codespell
-pylint

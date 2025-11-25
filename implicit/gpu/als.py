@@ -8,6 +8,7 @@ import implicit.gpu
 from implicit.gpu.matrix_factorization_base import MatrixFactorizationBase, check_random_state
 from implicit.utils import check_csr
 
+
 log = logging.getLogger("implicit")
 
 

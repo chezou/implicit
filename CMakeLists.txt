@@ -1,11 +1,16 @@
-cmake_minimum_required(VERSION 3.17.0)
+cmake_minimum_required(VERSION 3.21.0)
 
-project(implicit)
+project(${SKBUILD_PROJECT_NAME} LANGUAGES C CXX)
 
 enable_testing()
 
-find_package(PythonExtensions REQUIRED)
+# Use modern CMake Python support
+find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
+
+# Find Cython using cython-cmake
 find_package(Cython REQUIRED)
+include(UseCython)
+
 find_package(OpenMP)
 
 include_directories(.)

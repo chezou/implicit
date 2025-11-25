@@ -11,7 +11,6 @@ elseif(DEFINED ENV{IMPLICIT_DISABLE_CUDA})
 
 else()
     enable_language(CUDA)
-    add_cython_target(_cuda CXX)
 
     # use rapids-cmake to install dependencies
     # Set the rapids-cmake version before including RAPIDS.cmake
@@ -79,15 +78,19 @@ else()
 
     set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --extended-lambda -Xfatbin=-compress-all --expt-relaxed-constexpr")
 
-    add_library(_cuda MODULE ${_cuda}
+    cython_transpile(_cuda.pyx
+        LANGUAGE CXX
+        OUTPUT_VARIABLE _cuda_sources
+    )
+
+    python_add_library(_cuda MODULE ${_cuda_sources}
         als.cu
         bpr.cu
         matrix.cu
         random.cu
         knn.cu
+        WITH_SOABI
     )
-
-    python_extension_module(_cuda)
 
     if(DEFINED ENV{IMPLICIT_CUDA_ARCH})
         message("using cuda arch $ENV{IMPLICIT_CUDA_ARCH}")
@@ -104,7 +107,7 @@ else()
         get_target_property(CUDA_ARCH _cuda CUDA_ARCHITECTURES)
         message("using cuda architectures ${CUDA_ARCH} for cuda version ${CUDAToolkit_VERSION}")
     endif()
-    target_link_libraries(_cuda CUDA::cublas CUDA::curand rmm::rmm raft::raft)
+    target_link_libraries(_cuda PRIVATE CUDA::cublas CUDA::curand rmm::rmm raft::raft)
 
     install(TARGETS _cuda LIBRARY DESTINATION implicit/gpu)
 endif()

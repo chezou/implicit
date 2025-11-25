@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Implicit documentation build configuration file, created by
 # sphinx-quickstart on Mon Jul 10 17:23:10 2017.

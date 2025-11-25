@@ -1,20 +1,105 @@
-[tool.black]
-
-line-length = 100
-
 [build-system]
 requires = [
-    "setuptools>=42",
-    "wheel",
-    "scikit-build>=0.13.1",
+    "scikit-build-core>=0.10",
+    "cython-cmake>=0.2",
     "Cython>=0.24",
     "scipy>=0.16",
-    "cmake>=3.18",
-    "ninja"
+    "ninja>=1.10",
 ]
-build-backend = "setuptools.build_meta"
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "pm-implicit"
+version = "0.7.3"
+description = "Collaborative Filtering for Implicit Feedback Datasets"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    {name = "Aki Ariga", email = "chezou@gmail.com"}
+]
+keywords = [
+    "Matrix Factorization",
+    "Implicit Alternating Least Squares",
+    "Collaborative Filtering",
+    "Recommender Systems"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Natural Language :: English",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Cython",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "numpy>=1.17.0",
+    "scipy>=0.16",
+    "tqdm>=4.27",
+    "threadpoolctl"
+]
+
+[project.urls]
+Homepage = "http://github.com/chezou/pm-implicit/"
+Repository = "http://github.com/chezou/pm-implicit/"
+
+[project.optional-dependencies]
+ann = [
+    "annoy",
+    "nmslib-metabrainz",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff",
+    "codespell",
+    "h5py",
+]
+
+[tool.scikit-build]
+cmake.version = ">=3.21"
+cmake.build-type = "Release"
+wheel.packages = ["implicit"]
+wheel.exclude = [
+    "**/thrust/**",
+    "**/spdlog/**",
+    "**/rmm/**",
+    "**/lib/**",
+    "**/include/**",
+]
+minimum-version = "0.10"
+
+[tool.ruff]
+line-length = 100
+extend-exclude = ["examples/tutorial_lastfm.ipynb"]
+
+[tool.ruff.lint]
+# Enables: pycodestyle errors/warnings, pyflakes, isort, pyupgrade
+select = ["E", "W", "F", "I", "UP"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["implicit"]
+lines-after-imports = 2
+
+[tool.ruff.format]
+# Use double quotes, 4-space indentation, preserve trailing commas
+quote-style = "double"
+indent-style = "space"
+
+[tool.codespell]
+skip = "./.git,./.github,./build,./dist,./docs/build,.*egg-info.*,*.csv,*.tsv"
+ignore-words-list = "als,coo,nd,unparseable,compiletime"
 
 [tool.cibuildwheel]
+build-frontend = "build[uv]"
 # skip testing in the cibuildwheel phase, will install the wheels later
 # and verify
 test-command = ""
@@ -41,3 +126,16 @@ archs = ["x86_64", "universal2", "arm64"]
 
 [tool.pytest.ini_options]
 filterwarnings = ['ignore::implicit.utils.ParameterWarning']
+
+[tool.bumpversion]
+current_version = "0.7.3"
+commit = true
+tag = true
+
+[[tool.bumpversion.files]]
+filename = "implicit/__init__.py"
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'

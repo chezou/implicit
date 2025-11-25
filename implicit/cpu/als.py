@@ -1,4 +1,5 @@
-""" Implicit Alternating Least Squares """
+"""Implicit Alternating Least Squares"""
+
 import functools
 import heapq
 import logging
@@ -12,6 +13,7 @@ from tqdm.auto import tqdm
 from ..utils import check_blas_config, check_csr, check_random_state, nonzeros
 from . import _als
 from .matrix_factorization_base import MatrixFactorizationBase
+
 
 log = logging.getLogger("implicit")
 

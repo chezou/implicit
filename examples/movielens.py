@@ -10,8 +10,6 @@ filtered down to positive reviews (4+ stars) to construct an implicit
 dataset
 """
 
-from __future__ import print_function
-
 import argparse
 import codecs
 import logging
@@ -30,6 +28,7 @@ from implicit.nearest_neighbours import (
     TFIDFRecommender,
     bm25_weight,
 )
+
 
 log = logging.getLogger("implicit")
 
