@@ -113,8 +113,8 @@ jobs:
     - name: Install ANN Libraries
       run: |
         cd implicit_source
-        uv pip install annoy nmslib
-      if: ${{ matrix.python-version == '3.10' && runner.os == 'Linux' }}
+        uv pip install pm-implicit[ann]
+      if: ${{ matrix.python-version != '3.13' && matrix.python-version != '3.14' && runner.os == 'Linux' }}
 
     - name: Run unittests
       run: |

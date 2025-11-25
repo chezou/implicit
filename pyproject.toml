@@ -50,6 +50,12 @@ dependencies = [
 Homepage = "http://github.com/chezou/pm-implicit/"
 Repository = "http://github.com/chezou/pm-implicit/"
 
+[project.optional-dependencies]
+ann = [
+    "annoy",
+    "nmslib-metabrainz",
+]
+
 [dependency-groups]
 dev = [
     "pytest",
